@@ -1,0 +1,87 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* score panel */
+.score-panel {
+  text-align: left;
+  width: 345px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* icons */
+.score-panel .stars li {
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+}
+.restart {
+  cursor: pointer;
+}
+/* Game Board */
+.deck {
+  width: 800px;
+  min-height: 600px;
+  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 3em;
+}
+.game-board li {
+  list-style: none;
+}
+.cards {
+  width: 150px;
+  height: 110px;
+  background-color: #2e3d49;
+  color: white;
+  font-size: 0;
+  border-radius: 10px;
+  margin: 2px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgb(46 61 73 / 50%);
+  cursor: pointer;
+}
+
+/* 
+*Styling the cards 
+*/
+.faceup {
+  font-size: 50px;
+}
+.facedown {
+  font-size: 0;
+}
+.open {
+  transform: rotateY(0);
+  background-color: #02b3e4;
+  cursor: default;
+}
+.match {
+  cursor: default;
+  background-color: #02ccba;
+  font-size: 50px;
+}

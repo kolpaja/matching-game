@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matching Game</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="app.css" />
+    <script
+      src="https://kit.fontawesome.com/4e292ec4a8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <main id="container" class="container">
+      <header class="header">
+        <h1>Matching Game</h1>
+      </header>
+      <section class="score-panel">
+        <ul class="stars">
+          <li><i class="rating fa fa-star"></i></li>
+          <li><i class="rating fa fa-star"></i></li>
+          <li><i class="rating fa fa-star"></i></li>
+        </ul>
+        <span class="timer"
+          ><span class="timer-minutes">00</span><span> : </span
+          ><span class="timer-seconds">00</span></span
+        >
+        <div><span class="moves">0</span> Moves</div>
+        <div class="restart"><i class="fa fa-repeat"></i></div>
+      </section>
+      <div class="game-board">
+        <ul class="deck"></ul>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
