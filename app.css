@@ -120,7 +120,9 @@ h1 {
 }
 .medal .win-summary {
   font-size: 32px;
+  font-weight: bold;
   text-align: center;
+  color: white;
 }
 .medal .win-button {
   background-color: #02ccba;

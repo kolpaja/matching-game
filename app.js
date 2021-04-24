@@ -79,6 +79,36 @@ const icons = [
   const winnerBtn = document.querySelector(".win-button");
   const winMoves = document.querySelector(".win-moves");
   const deck = document.querySelector(".deck");
+  const timer = document.querySelector(".timer");
+  let second = 0, minute = 0, hour =0;
+  let interval;
+function startTimer() {
+    interval = setInterval(() => {
+      timer.innerHTML = minute + " mins " + second + " secs"
+      second++;
+      if (second == 60) {
+        minute++;
+        second = 0;
+      } if (minute == 60) {
+        hour++;
+        minute = 0;
+      }
+    }, 1000);
+}
+function winTime() {
+  let seconds = second;
+  let minutes = minute;
+  let hours = hour;
+  console.log(`seconds : ${seconds}, minutes: ${minutes} , hours: ${hours}`);
+  stopTimer();
+  
+  }
+function stopTimer() {
+  second = 0;
+  minute = 0;
+  hour = 0;
+  clearInterval(interval);
+}
   
   //deck shuffle fnx // new game
   function startGame() {
@@ -95,7 +125,26 @@ const icons = [
           moves++;
           counter.innerHTML = moves;
           winningMoves = moves;
+          if (moves == 1) {
+            second = 0;
+            minute = 0;
+            hour = 0;
+            startTimer();
+          }
           console.log("inside moveCounter: ", winningMoves);
+          if (moves > 8 && moves < 12) {
+            for (let i = 0; i < 3; i++){
+              if (i > 1) {
+                stars[i].style.visibility = "collapse"
+              }
+            }
+          } else if (moves > 13) {
+            for (let i = 0; i < 3; i++){
+              if (i > 0) {
+                stars[i].style.visibility = "collapse"
+              }
+            }
+          }
         }
         function matched() {
           console.log("its a match");
@@ -137,21 +186,18 @@ const icons = [
           }
         }
       };
-  
       deck.appendChild(newli);
     }
   }
   // winner status
   function winning() {
     win++;
-    console.log("inside winning fnx, win is:", win);
-    console.log(matchedcards);
-    if (win == 1) {
-      console.log(winningMoves);
+    if (win == 2) {
+      winTime();
+      stopTimer();
       winSummary();
-      console.log("inside if winning: won");
       medal.classList.remove("hide");
-      winBoard.classList.remove("hide");
+      winBoard.classList.remove("hide"); 
     }
   }
   function winSummary() {
@@ -159,10 +205,17 @@ const icons = [
   }
   //medal
   //todo play anothe game
-  winnerBtn.addEventListener("click", () => newGame());
+winnerBtn.addEventListener("click", () => {
+  newGame();
+  stopTimer();
+});
   //restarting the game
-  restart.addEventListener("click", () => newGame());
-  function newGame() {
+restart.addEventListener("click", () => {
+  newGame();
+  stopTimer();
+  });
+function newGame() {
+    timer.innerHTML = "0 mins 0 secs"
     deck.innerHTML = "";
     startGame();
     cardOpened = [];
