@@ -14,6 +14,7 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 0;
 }
 
 /* score panel */
@@ -85,3 +86,95 @@ h1 {
   background-color: #02ccba;
   font-size: 50px;
 }
+.disabled {
+  font-size: 0;
+  color: #2e3d49;
+}
+
+/* 
+* Winning medal style
+*/
+.win-board {
+  width: 800px;
+  height: 600px;
+  padding: 32px;
+  margin: 0 0 3em;
+  border-radius: 10px;
+  background-color: rgba(46, 61, 73, 0.5);
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+/* .medal {
+  display: flex;
+} */
+.medal .win-icon {
+  color: #02ccba;
+  font-size: 144px;
+}
+.medal .win-banner {
+  font-size: 48px;
+}
+.medal .win-summary {
+  font-size: 32px;
+  text-align: center;
+}
+.medal .win-button {
+  background-color: #02ccba;
+}
+.hide {
+  display: none;
+}
+/* 
+
+*making responsive
+ */
+@media (max-width: 800px) {
+  .cards {
+    width: 140px;
+    height: 70px;
+  }
+  .deck {
+    width: 100vw;
+    min-height: 500px;
+  }
+}
+@media (max-width: 650px) {
+  .cards {
+    width: 112px;
+    height: 70px;
+  }
+  .deck {
+    width: 100vw;
+    min-height: 400px;
+  }
+}
+@media (max-width: 550px) {
+  .cards {
+    width: 91px;
+    height: 60px;
+  }
+  .deck {
+    width: 100vw;
+  }
+}
+@media (max-width: 450px) {
+  .cards {
+    width: 72px;
+    height: 55px;
+  }
+  .deck {
+    width: 100vw;
+  }
+}
+@media (max-width: 380px) {
+  .cards {
+    width: 60px;
+    height: 50px;
+  }
+  .deck {
+    width: 100vw;
+  }
+} ;
