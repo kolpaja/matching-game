@@ -176,11 +176,15 @@ function startGame() {
 }
 //@description display the cards
 const displayCard = function () {
-  this.classList.add('open');
-  this.classList.add('show');
+  if (cardOpened.length < 2) {
+    this.classList.add('open');
+    this.classList.add('show');
+    this.classList.add('disabled');
+  }
 }
 function cardOpen() {
-  cardOpened.push(this);
+  if (cardOpened.length < 2 ) {
+    cardOpened.push(this);
   let len = cardOpened.length;
   if (len === 2) {
     moveCounter();
@@ -189,14 +193,15 @@ function cardOpen() {
     } else
       unmatched();
   }
+  }
 }
 //@description on matched cards
 function matched() {
   console.log("its a match");
   cardOpened[0].classList.remove("open", "show")
   cardOpened[1].classList.remove("open", "show")
-  cardOpened[0].classList.add("match")
-  cardOpened[1].classList.add("match")
+  cardOpened[0].classList.add("match", "disabled")
+  cardOpened[1].classList.add("match", "disabled")
   congratulations();
   cardOpened = [];
 }
@@ -204,10 +209,10 @@ function matched() {
 function unmatched() {
   console.log("u loose");
   setTimeout(() => {
-    cardOpened[0].classList.remove("open","show")
-    cardOpened[1].classList.remove("open","show")
+    cardOpened[0].classList.remove("open","show","disabled")
+    cardOpened[1].classList.remove("open","show", "disabled")
     cardOpened = [];
-  }, 200);
+  }, 500);
 }
 // winner status
 function congratulations() {

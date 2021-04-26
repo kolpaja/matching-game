@@ -73,9 +73,6 @@ h1 {
 .show {
   font-size: 50px;
 }
-.facedown {
-  font-size: 0;
-}
 .open {
   transform: rotateY(0);
   background-color: #02b3e4;
@@ -100,8 +97,8 @@ h1 {
   animation-duration: 0.5s;
 }
 .disabled {
-  font-size: 0;
-  background-color: #2e3d49;
+  pointer-events: none;
+  opacity: 0.9;
 }
 
 /* 
