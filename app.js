@@ -207,7 +207,7 @@ function unmatched() {
     cardOpened[0].classList.remove("open","show")
     cardOpened[1].classList.remove("open","show")
     cardOpened = [];
-  }, 500);
+  }, 200);
 }
 // winner status
 function congratulations() {
