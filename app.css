@@ -70,7 +70,7 @@ h1 {
 /* 
 *Styling the cards 
 */
-.faceup {
+.show {
   font-size: 50px;
 }
 .facedown {
@@ -107,41 +107,70 @@ h1 {
 /* 
 * Winning medal style
 */
-.win-board {
-  width: 800px;
-  height: 600px;
-  padding: 32px;
-  margin: 0 0 3em;
-  border-radius: 10px;
-  background-color: rgba(46, 61, 73, 0.5);
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  width: 85%;
+  position: relative;
+  /* transition: all 5s ease-in-out; */
+  font-family: "Gloria Hallelujah", cursive;
 }
 
-.medal {
-  display: flex;
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
 }
-.medal .win-icon {
-  color: #02ccba;
-  font-size: 144px;
-}
-.medal .win-banner {
-  font-size: 48px;
-}
-.medal .win-summary {
-  font-size: 32px;
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
   font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #e5f720;
+}
+
+.popup .content-1,
+.content-2 {
+  max-height: 30%;
+  overflow: auto;
   text-align: center;
-  color: white;
 }
-.medal .win-button {
-  background-color: #02ccba;
+
+.show {
+  visibility: visible !important;
+  opacity: 100 !important;
 }
-.hide {
-  display: none;
+#play-again {
+  background-color: #141214;
+  padding: 0.7rem 1rem;
+  font-size: 1.1rem;
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  font-family: "Gloria Hallelujah", cursive;
+  color: #ffffff;
+  border-radius: 5px;
 }
 /* 
 

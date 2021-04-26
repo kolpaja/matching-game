@@ -1,238 +1,240 @@
 //Array for the icons
 const icons = [
-    {
-      name: "cat",
-      id: 1,
-    },
-    {
-      name: "dog",
-      id: 2,
-    },
-    {
-      name: "dove",
-      id: 3,
-    },
-    {
-      name: "dragon",
-      id: 4,
-    },
-    {
-      name: "fish",
-      id: 5,
-    },
-    {
-      name: "frog",
-      id: 6,
-    },
-    {
-      name: "spider",
-      id: 7,
-    },
-    {
-      name: "horse",
-      id: 8,
-    },
-    {
-      name: "cat",
-      id: 9,
-    },
-    {
-      name: "dog",
-      id: 10,
-    },
-    {
-      name: "dove",
-      id: 11,
-    },
-    {
-      name: "dragon",
-      id: 12,
-    },
-    {
-      name: "fish",
-      id: 13,
-    },
-    {
-      name: "frog",
-      id: 14,
-    },
-    {
-      name: "spider",
-      id: 15,
-    },
-    {
-      name: "horse",
-      id: 16,
-    },
-  ];
-  // global variables
-  let moves = 0;
-  let cardOpened = [];
-  let matchedcards = [];
-  let win = 0;
-  let winningMoves = 0;
-  const restart = document.querySelector(".restart");
-  const counter = document.querySelector(".moves");
-  const container = document.querySelector("#container");
-  const medal = document.querySelector(".medal");
-  const winBoard = document.querySelector(".win-board");
-  const winnerBtn = document.querySelector(".win-button");
-  const winMoves = document.querySelector(".win-moves");
-  const winSeconds = document.querySelector(".win-seconds");
-  const winMinutes = document.querySelector(".win-minutes");
-  const deck = document.querySelector(".deck");
-  const timer = document.querySelector(".timer");
-  let second = 0, minute = 0, hour =0;
-  let interval;
+  {
+    name: "cat",
+    id: 1,
+  },
+  {
+    name: "dog",
+    id: 2,
+  },
+  {
+    name: "dove",
+    id: 3,
+  },
+  {
+    name: "dragon",
+    id: 4,
+  },
+  {
+    name: "fish",
+    id: 5,
+  },
+  {
+    name: "frog",
+    id: 6,
+  },
+  {
+    name: "spider",
+    id: 7,
+  },
+  {
+    name: "horse",
+    id: 8,
+  },
+  {
+    name: "cat",
+    id: 9,
+  },
+  {
+    name: "dog",
+    id: 10,
+  },
+  {
+    name: "dove",
+    id: 11,
+  },
+  {
+    name: "dragon",
+    id: 12,
+  },
+  {
+    name: "fish",
+    id: 13,
+  },
+  {
+    name: "frog",
+    id: 14,
+  },
+  {
+    name: "spider",
+    id: 15,
+  },
+  {
+    name: "horse",
+    id: 16,
+  },
+];
+// when the icons are loaded
+
+
+//shuffle cards
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
+// global variables
+let moves = 0;
+let cardOpened = [];
+let matchedcards = [];
+let win = 0;
+let winningMoves = 0;
+const restart = document.querySelector(".restart");
+const counter = document.querySelector(".moves");
+const deck = document.querySelector(".deck");
+const timer = document.querySelector(".timer");
+let matchedCard = document.getElementsByClassName("match");
+const medal = document.querySelector("#popup1")
+let second = 0,
+  minute = 0,
+  hour = 0;
+let interval;
 function startTimer() {
-    interval = setInterval(() => {
-      timer.innerHTML = minute + " mins " + second + " secs"
-      second++;
-      if (second == 60) {
-        minute++;
-        second = 0;
-      } if (minute == 60) {
-        hour++;
-        minute = 0;
-      }
-    }, 1000);
+  interval = setInterval(() => {
+    timer.innerHTML = minute + " mins " + second + " secs";
+    second++;
+    if (second == 60) {
+      minute++;
+      second = 0;
+    }
+    if (minute == 60) {
+      hour++;
+      minute = 0;
+    }
+  }, 1000);
 }
 function winTime() {
-  winSeconds.textContent = second;
-  winMinutes.textContent = minute;
-  console.log(`seconds : ${second}, minutes: ${minute} , hours: ${hour}`);
+  const seconds = second;
+  const minutes = minute;
+  const hours = hour;
+  console.log(`seconds : ${seconds}, minutes: ${minutes} , hours: ${hours}`);
+  document.querySelector("#totalTime").textContent = `${minutes} mins & ${seconds} secs`;
   stopTimer();
-  }
+}
 function stopTimer() {
   second = 0;
   minute = 0;
   hour = 0;
   clearInterval(interval);
 }
-  //deck shuffle fnx // new game
-  function startGame() {
-    for (let i = 0; i < icons.length; i++) {
-      const newli = document.createElement("li");
-      newli.classList.add("cards");
-      newli.setAttribute("id", `C${i + 1}`);
-      newli.setAttribute("data-id", `${icons[i].id}`);
-      newli.innerHTML = `<i class="fas fa-${icons[i].name}"></i>`;
-      newli.onclick = () => {
-        newli.classList.add("faceup", "open");
-        cardOpened.length > 0 && console.log(cardOpened[0].name, icons[i].name);
-        function moveCounter() {
-          moves++;
-          counter.innerHTML = moves;
-          winningMoves = moves;
-          if (moves == 1) {
-            second = 0;
-            minute = 0;
-            hour = 0;
-            startTimer();
-          }
-          console.log("inside moveCounter: ", winningMoves);
-          if (moves > 8 && moves < 12) {
-            for (let i = 0; i < 3; i++){
-              if (i > 1) {
-                stars[i].style.visibility = "collapse"
-              }
-            }
-          } else if (moves > 13) {
-            for (let i = 0; i < 3; i++){
-              if (i > 0) {
-                stars[i].style.visibility = "collapse"
-              }
-            }
-          }
-        }
-        function matched() {
-          console.log("its a match");
-          const elem = document.querySelector(`[data-id="${cardOpened[0].id}"]`);
-          elem.classList.toggle("faceup");
-          elem.classList.toggle("open");
-          elem.classList.toggle("match");
-          newli.classList.toggle("faceup");
-          newli.classList.toggle("open");
-          newli.classList.toggle("match");
-          winning();
-          cardOpened = [];
-        }
-        function unmatched() {
-          console.log("u loose");
-          setTimeout(() => {
-            const elem = document.querySelector(
-              `[data-id="${cardOpened[0].id}"]`
-            );
-            elem.classList.toggle("unmatch");
-            elem.classList.toggle("faceup");
-            elem.classList.toggle("open");
-            elem.classList.add('disabled');
-            newli.classList.toggle("unmatch");
-            newli.classList.toggle("faceup");
-            newli.classList.toggle("open");
-            newli.classList.add('disabled');
-            cardOpened = [];
-          }, 500);
-        }
-        if (cardOpened.length === 0) {
-          cardOpened.push(icons[i]);
-        } else if (cardOpened.length > 0) {
-          cardOpened.push(icons[i]);
-          if (cardOpened[0].name == cardOpened[1].name) {
-            matchedcards.push(cardOpened[0]);
-            matchedcards.push(cardOpened[1]);
-            moveCounter();
-            matched();
-          } else {
-            moveCounter();
-            unmatched();
-          }
-        }
-      };
-      deck.appendChild(newli);
+//@description move vounter
+function moveCounter() {
+  moves++;
+  counter.innerHTML = moves;
+  winningMoves = moves;
+  if (moves == 1) {
+    second = 0;
+    minute = 0;
+    hour = 0;
+    startTimer();
+  }
+  console.log("inside moveCounter: ", winningMoves);
+  if (moves > 8 && moves < 12) {
+    for (let i = 0; i < 3; i++) {
+      if (i > 1) {
+        stars[i].style.visibility = "collapse";
+      }
+    }
+  } else if (moves > 13) {
+    for (let i = 0; i < 3; i++) {
+      if (i > 0) {
+        stars[i].style.visibility = "collapse";
+      }
     }
   }
-  // winner status
-  function winning() {
-    win++;
-    if (win == 2) {
-      winTime();
-      stopTimer();
-      winSummary();
-      medal.classList.remove("hide");
-      winBoard.classList.remove("hide"); 
-    }
+}
+//deck shuffle fnx // new game
+function startGame() {
+  openedCards = [];
+  const shuffledIcons = shuffle(icons);
+  for (let i = 0; i < shuffledIcons.length; i++) {
+    const newli = document.createElement("li");
+    newli.classList.add("cards");
+    newli.setAttribute("id", `C${i + 1}`);
+    newli.setAttribute("type", `${shuffledIcons[i].name}`);
+    newli.setAttribute("data-id", `${shuffledIcons[i].id}`);
+    newli.innerHTML = `<i class="fas fa-${shuffledIcons[i].name}"></i>`;
+    deck.appendChild(newli);
   }
-function winSummary() {
-  
-  winMoves.textContent = winningMoves;
-  
+  let card = document.getElementsByClassName("cards")
+  let cards = [...card];
+  console.log('cards: ', card);
+  for (let i = 0; i < cards.length; i++){
+    card = cards[i];
+    card.addEventListener("click", displayCard);
+    card.addEventListener("click", cardOpen);
   }
-  //medal
-  //todo play anothe game
-winnerBtn.addEventListener("click", () => {
-  newGame();
-  stopTimer();
-});
-  //restarting the game
+}
+//@description display the cards
+const displayCard = function () {
+  this.classList.add('open');
+  this.classList.add('show');
+}
+function cardOpen() {
+  cardOpened.push(this);
+  let len = cardOpened.length;
+  if (len === 2) {
+    moveCounter();
+    if (cardOpened[0].type == cardOpened[1].type) {
+      matched();
+    } else
+      unmatched();
+  }
+}
+//@description on matched cards
+function matched() {
+  console.log("its a match");
+  cardOpened[0].classList.remove("open", "show")
+  cardOpened[1].classList.remove("open", "show")
+  cardOpened[0].classList.add("match")
+  cardOpened[1].classList.add("match")
+  congratulations();
+  cardOpened = [];
+}
+//#description on unmatched cards
+function unmatched() {
+  console.log("u loose");
+  setTimeout(() => {
+    cardOpened[0].classList.remove("open","show")
+    cardOpened[1].classList.remove("open","show")
+    cardOpened = [];
+  }, 500);
+}
+// winner status
+function congratulations() {
+  if (matchedCard.length == icons.length) {
+    winTime();
+    console.log('inside congratulations: u won. wiwinningMoves: ', winningMoves);
+    document.querySelector("#finalMove").textContent = winningMoves;
+    stopTimer();
+    medal.classList.add("show")
+  }
+}
 restart.addEventListener("click", () => {
   newGame();
   stopTimer();
-  });
+});
 function newGame() {
-    timer.innerHTML = "0 mins 0 secs"
-    deck.innerHTML = "";
-    startGame();
-    cardOpened = [];
-    matchedcards = [];
-    counter.innerHTML = 0;
-    win = 0;
-    moves = 0;
-    medal.classList.add("hide");
-    winBoard.classList.add("hide");
-  }
-  //remove class try
-  window.onload = () => {
-    startGame();
-    newGame();
-  };
+  stopTimer();
+  timer.innerHTML = "0 mins 0 secs";
+  deck.innerHTML = "";
+  cardOpened = [];
+  matchedcards = [];
+  counter.innerHTML = 0;
+  win = 0;
+  moves = 0;
+  medal.classList.remove("show")
+  startGame();
+}
+window.onload = () => {
+  newGame();
+};

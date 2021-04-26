@@ -36,19 +36,23 @@
         <ul class="deck"></ul>
       </div>
     </main>
-    <div class="win-board hide">
-      <div class="container medal">
-        <i class="win-icon fa fa-check-circle-o"></i>
-        <h1 class="win-banner">You Are a winner!</h1>
-        <p class="win-summary">
-          You won in <span class="win-minutes">00</span> minutes,
-          <span class="win-seconds">00</span> seconds, using
-          <span class="win-moves">00</span> moves, for
-          <span class="win-stars">0</span> stars
-        </p>
-        <button class="win-button">Play Another Game!</button>
+    <div id="popup1" class="overlay">
+      <div class="popup">
+          <h2>Congratulations 🎉</h2>
+          <a class="close" href=# onclick="newGame()">×</a>
+          <div class="content-1">
+              Congratulations you're a winner 🎉🎉
+          </div>
+          <div class="content-2">
+              <p>You made <span id=finalMove> </span> moves </p>
+              <p>in <span id=totalTime> </span> </p>
+              <p>Rating:  <span id=starRating></span></p>
+          </div>
+          <button id="play-again"onclick="newGame()">
+              Play again 😄</a>
+          </button>
       </div>
-    </div>
+  </div>
     <footer class="footer"></footer>
     <script src="app.js"></script>
   </body>
