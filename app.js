@@ -78,6 +78,8 @@ const icons = [
   const winBoard = document.querySelector(".win-board");
   const winnerBtn = document.querySelector(".win-button");
   const winMoves = document.querySelector(".win-moves");
+  const winSeconds = document.querySelector(".win-seconds");
+  const winMinutes = document.querySelector(".win-minutes");
   const deck = document.querySelector(".deck");
   const timer = document.querySelector(".timer");
   let second = 0, minute = 0, hour =0;
@@ -96,12 +98,10 @@ function startTimer() {
     }, 1000);
 }
 function winTime() {
-  let seconds = second;
-  let minutes = minute;
-  let hours = hour;
-  console.log(`seconds : ${seconds}, minutes: ${minutes} , hours: ${hours}`);
+  winSeconds.textContent = second;
+  winMinutes.textContent = minute;
+  console.log(`seconds : ${second}, minutes: ${minute} , hours: ${hour}`);
   stopTimer();
-  
   }
 function stopTimer() {
   second = 0;
@@ -109,7 +109,6 @@ function stopTimer() {
   hour = 0;
   clearInterval(interval);
 }
-  
   //deck shuffle fnx // new game
   function startGame() {
     for (let i = 0; i < icons.length; i++) {
@@ -164,10 +163,14 @@ function stopTimer() {
             const elem = document.querySelector(
               `[data-id="${cardOpened[0].id}"]`
             );
+            elem.classList.toggle("unmatch");
             elem.classList.toggle("faceup");
             elem.classList.toggle("open");
+            elem.classList.add('disabled');
+            newli.classList.toggle("unmatch");
             newli.classList.toggle("faceup");
             newli.classList.toggle("open");
+            newli.classList.add('disabled');
             cardOpened = [];
           }, 500);
         }
@@ -200,8 +203,10 @@ function stopTimer() {
       winBoard.classList.remove("hide"); 
     }
   }
-  function winSummary() {
-    winMoves.textContent = winningMoves;
+function winSummary() {
+  
+  winMoves.textContent = winningMoves;
+  
   }
   //medal
   //todo play anothe game
